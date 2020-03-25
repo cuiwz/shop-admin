@@ -9,6 +9,12 @@ import './assets/css/global.css' // 导入全局样式表
 
 Vue.config.productionTip = false
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/' // 配置请求的根路径
+axios.interceptors.request.use(config => {
+  // console.log(config)
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  // 在最后必须 return config
+  return config
+})
 Vue.prototype.$http = axios
 
 new Vue({
